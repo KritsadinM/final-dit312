@@ -10,22 +10,6 @@ pipeline {
             }
         }
 
-        stage('Prepare ENV') {
-            steps {
-                echo "📄 Copying .env.example → .env"
-                sh 'cp backend/.env.example backend/.env'
-
-                // 👇 แทรกค่าจริงลง .env
-                sh '''
-                    sed -i 's/DB_HOST=.*/DB_HOST=db/' backend/.env
-                    sed -i 's/DB_USER=.*/DB_USER=root/' backend/.env
-                    sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=root123/' backend/.env
-                    sed -i 's/DB_NAME=.*/DB_NAME=movies_db/' backend/.env
-                    sed -i 's/PORT=.*/PORT=4000/' backend/.env
-                '''
-            }
-        }
-
         stage('Build Docker Images') {
             steps {
                 echo "🛠 Building docker images..."
