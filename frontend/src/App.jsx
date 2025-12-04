@@ -8,7 +8,7 @@ export default function App() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:4000/movies")
+    fetch("http://10.0.2.15:4000/movies")
       .then((res) => res.json())
       .then((data) => setMovies(data));
   }, []);
