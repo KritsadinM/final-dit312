@@ -33,16 +33,16 @@ services:
         condition: service_healthy
 
   phpmyadmin:
-    image: phpmyadmin:latest
-    container_name: dit312final_phpmyadmin
-    ports:
-      - "8888:80"
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
     environment:
-      PMA_HOST: db
-      PMA_USER: user
-      PMA_PASSWORD: pass
-    depends_on:
-      - db
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 256M
+    ports:
+      - "${PHPMYADMIN_PORT:-8888}:80"
+    depends_on: [mysql]
+    networks: [stack]
 
   frontend:
     build:
