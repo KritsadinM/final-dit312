@@ -42,7 +42,7 @@ pipeline {
                 script {
                     sleep 25
                     def status = sh(
-                        script: "curl -s -o /dev/null -w '%{http_code}' http://10.0.2.15:4000/movies",
+                        script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:4000/movies",
                         returnStdout: true
                     ).trim()
 
