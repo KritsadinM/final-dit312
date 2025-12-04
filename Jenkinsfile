@@ -56,7 +56,7 @@ pipeline {
             steps {
                 echo "Checking API..."
                 script {
-                    sleep 8
+                    sleep 25
                     def status = sh(
                         script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:4000/movies",
                         returnStdout: true

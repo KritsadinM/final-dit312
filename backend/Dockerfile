@@ -5,4 +5,6 @@ RUN npm install --production
 COPY . .
 ENV PORT=4000
 EXPOSE 4000
-CMD ["node", "app.js"]
+COPY wait-for-db.js ./
+CMD ["sh", "-c", "node wait-for-db.js && node app.js"]
+
