@@ -14,6 +14,15 @@ pipeline {
             steps {
                 echo "📄 Copying .env.example → .env"
                 sh 'cp backend/.env.example backend/.env'
+
+                // 👇 แทรกค่าจริงลง .env
+                sh '''
+                    sed -i 's/DB_HOST=.*/DB_HOST=db/' backend/.env
+                    sed -i 's/DB_USER=.*/DB_USER=root/' backend/.env
+                    sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=root123/' backend/.env
+                    sed -i 's/DB_NAME=.*/DB_NAME=movies_db/' backend/.env
+                    sed -i 's/PORT=.*/PORT=4000/' backend/.env
+                '''
             }
         }
 
@@ -28,10 +37,8 @@ pipeline {
             steps {
                 echo "🚀 Deploying services..."
 
-                // 🔥 ลบทุก container ที่ใช้ port 4000 (ทั้งรันอยู่และหยุดอยู่)
                 sh 'docker rm -f $(docker ps -aq --filter publish=4000) || true'
 
-                // ลบ container เผื่อชื่อค้าง
                 sh 'docker rm -f dit312final_db || true'
                 sh 'docker rm -f dit312final_api || true'
                 sh 'docker rm -f dit312final_backend || true'
