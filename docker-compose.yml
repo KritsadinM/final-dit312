@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   db:
     image: mysql:8
@@ -22,18 +20,7 @@ services:
     ports:
       - "4000:4000"
     env_file:
-      - ./backend/.env.example
-    depends_on:
-      - db
-
-  backend:
-    build:
-      context: ./backend
-    container_name: dit312_backend
-    ports:
-      - "4000:4000"
-    env_file:
-      - ./backend/.env.example
+      - ./backend/.env
     depends_on:
       - db
 
