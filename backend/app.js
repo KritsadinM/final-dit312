@@ -26,6 +26,7 @@ app.get('/movies', async (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(process.env.PORT, () => {
-  console.log(`API listening on port ${process.env.PORT}`);
+app.listen(process.env.API_PORT, "0.0.0.0", () => {
+  console.log(`API listening on port ${process.env.API_PORT}`);
 });
+
